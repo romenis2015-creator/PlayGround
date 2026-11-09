@@ -1,8 +1,0 @@
-{
-  "name": "deadzone-battle-royale",
-  "version": "1.0.0",
-  "type": "module",
-  "scripts": { "start": "vite --host 0.0.0.0", "build": "vite build" },
-  "dependencies": { "three": "^0.187.0", "vite": "^6.4.1" },
-  "devDependencies": {}
-}
