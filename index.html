@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <meta name="theme-color" content="#101a20" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='%23d8ff59' d='M3 3h26v19l-9 7H3z'/%3E%3Ctext x='8' y='23' font-size='22' font-family='sans-serif' font-weight='900' fill='%2318211e'%3ED%3C/text%3E%3C/svg%3E" />
+  <title>Deadzone — Last Stand</title>
+</head>
+<body>
+  <div id="game"></div>
+  <div class="vignette"></div>
+  <div class="topline"><div class="brand"><span class="brand-mark">D</span><span>DEADZONE <small>LAST STAND</small></span></div><div class="phase-pill"><i></i><span id="phaseText">ISLAND // SECTOR 07</span></div><div class="top-right"><span class="ping">● LIVE</span><span class="top-divider"></span><span class="help-key">ESC <b>PAUSE</b></span></div></div>
+  <div class="hud" id="hud">
+    <div class="left-hud"><div class="round-card"><span class="eyebrow">CURRENT WAVE</span><div class="wave-row"><span class="wave-num" id="waveNum">01</span><span class="wave-name" id="waveName">THE AWAKENING</span></div><div class="wave-progress"><span id="waveProgress"></span></div><div class="wave-meta"><span id="enemyCount">0 HOSTILES REMAINING</span><span id="waveTimer"></span></div></div><div class="stat-stack"><div class="stat-label"><span>♥</span> VITALS</div><div class="bar-shell health-shell"><div class="health-fill" id="healthFill"></div><b id="healthValue">100</b></div><div class="bar-shell shield-shell"><div class="shield-fill" id="shieldFill"></div><b id="shieldValue">50</b></div><div class="resource-chip"><span>▧</span> <b id="woodCount">120</b><small>WOOD</small></div></div></div>
+    <div class="crosshair" id="crosshair"><span></span><i></i></div>
+    <div class="center-message" id="centerMessage"></div>
+    <div class="right-hud"><div class="mini-map"><div class="map-label">SECTOR 07 <span>● SAFE ZONE</span></div><div class="map-grid"><div class="map-ring"></div><div class="map-dot player-dot"></div><div class="map-dot threat-dot t1"></div><div class="map-dot threat-dot t2"></div><div class="map-dot threat-dot t3"></div><div class="map-compass">N</div></div></div><div class="kill-feed" id="killFeed"></div></div>
+    <div class="bottom-left"><div class="action-hint"><kbd>Q</kbd><span>QUICK BUILD</span></div><div class="action-hint"><kbd>F</kbd><span>INTERACT</span></div></div>
+    <div class="bottom-center"><div class="weapon-card"><div class="weapon-icon"><svg viewBox="0 0 80 38"><path d="M9 16h33l8-5h11v5h12v5H62l-3 7H48l-4-7H28l-3 7h-8l1-7H9z" fill="currentColor"/><path d="M34 22v11h-7V22M55 22l-1 8h-5l-1-8" fill="currentColor"/></svg></div><div class="weapon-info"><span>ASSAULT RIFLE <b>◆ COMMON</b></span><strong><em id="ammoClip">30</em><i>/</i><small id="ammoReserve">180</small></strong></div><div class="reload-indicator" id="reloadIndicator">RELOADING</div></div><div class="quickbar"><div class="slot active"><kbd>1</kbd><span class="slot-item gun-slot">⌁</span></div><div class="slot"><kbd>2</kbd><span class="slot-item">▱</span><small>3</small></div><div class="slot"><kbd>3</kbd><span class="slot-item">▣</span><small>2</small></div><div class="slot build-slot"><kbd>Q</kbd><span class="slot-item">⌂</span></div></div></div>
+    <div class="bottom-right"><div class="match-stats"><span><b id="killCount">0</b> ELIMS</span><span class="stat-sep">/</span><span><b id="scoreCount">0</b> SCORE</span></div><div class="controls-hint">WASD MOVE <i>•</i> SHIFT SPRINT <i>•</i> SPACE JUMP <i>•</i> CLICK FIRE <i>•</i> R RELOAD</div></div>
+  </div>
+  <div class="overlay" id="startOverlay"><div class="menu-card"><div class="menu-kicker"><span></span> SURVIVAL PROTOCOL // 07</div><h1>THE<br><em>DEADZONE</em></h1><p class="menu-sub">THEY KEEP COMING. YOU KEEP BUILDING.</p><div class="menu-rule"></div><div class="mission-row"><div><small>MISSION</small><strong>Survive the waves</strong></div><div><small>THREAT LEVEL</small><strong class="threat">● ● ● <i>● ●</i></strong></div></div><button id="startButton" class="start-button"><span>DROP IN</span><b>→</b></button><div class="menu-controls"><span><kbd>W A S D</kbd> MOVE</span><span><kbd>MOUSE</kbd> AIM</span><span><kbd>CLICK</kbd> FIRE</span><span><kbd>Q</kbd> BUILD</span></div></div><div class="menu-side-note">NO EXTRACTION INBOUND <span>//</span> MAKE IT COUNT</div></div>
+  <div class="pause-overlay hidden" id="pauseOverlay"><div class="pause-card"><small>FIELD MANUAL // 01</small><h2>TAKE A BREATH.</h2><p>The dead don't.</p><button id="resumeButton" class="start-button"><span>BACK TO IT</span><b>→</b></button><div class="pause-controls">WASD move <i>•</i> Mouse aim <i>•</i> Click fire <i>•</i> Q build <i>•</i> R reload</div></div></div>
+  <div class="gameover-overlay hidden" id="gameoverOverlay"><div class="pause-card"><small>MISSION REPORT // 07</small><h2 class="dead-title">SIGNAL LOST.</h2><p id="finalStats">You held the line.</p><button id="restartButton" class="start-button"><span>RUN IT BACK</span><b>↻</b></button></div></div>
+  <div class="toast" id="toast"></div>
+  <div class="mobile-controls" id="mobileControls"><div class="mobile-stick" id="moveStick"><div></div></div><button class="mobile-fire" id="mobileFire">FIRE</button><button class="mobile-jump" id="mobileJump">↑</button><button class="mobile-build" id="mobileBuild">BUILD</button></div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
